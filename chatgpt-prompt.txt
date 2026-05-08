@@ -1,0 +1,18 @@
+I need to write a software specification, and I need your help with writing it.
+
+I want to build a flashcards app to help learn Marathi in the form of a web application using TypeScript and Vite/React.
+
+Here are some features I think I will need:
+
+Each card should be in Marathi, and I need to know the word in English.
+It should have the ability to flip cards revealing the word in English.
+After flipping, below each card I should have two buttons, ask if I got it wrong or right
+Remember which cards I got wrong.
+
+Feature: To redo only cards I don’t know.
+Quiz/Test Mode: Multiple choice or fill-in-the-blank options.
+Statistics page: Track how many cards you've studied, correct vs. incorrect answers.
+
+The output should be formatted as Markdown.
+
+Ask follow-up questions if something is unclear BEFORE you start generating.
