@@ -7,7 +7,7 @@ Below is a prioritized checklist you can follow to implement one feature at a ti
 
 ---
 
-## Phase 0 — Project scaffold (very easy, prerequisite)
+## ✅ Phase 0 — Project scaffold (very easy, prerequisite)
 - [x] **Create project scaffold (Vite + React + TypeScript)**  
   **Acceptance criteria**
   - `npm create vite@latest` (or equivalent) project created with React + TS template.  
