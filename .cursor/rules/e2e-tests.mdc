@@ -1,0 +1,53 @@
+---
+alwaysApply: true
+---
+# E2E Testing Conventions
+
+Source of truth: `docs/PlaywrightE2ETests.md`. Follow the rules below when authoring tests or any UI element exercised by tests.
+
+> **Keep in sync:** Whenever you touch E2E work, skim `docs/PlaywrightE2ETests.md` for changes and propose updates to this rule file — but only fold in guidance that is *actionable for the agent* (conventions, patterns, do/don't). Skip prose, philosophy, or anything that doesn't change how code is written.
+
+## data-testid (components)
+
+- Add `data-testid` to every element a test interacts with or asserts on.
+- `data-testid` MUST be the **first attribute** on the element.
+- Always prefix the value with `af-`.
+
+```tsx
+// BAD
+<button onClick={onFlip} className="btn">Flip</button>
+
+// GOOD
+<button data-testid="af-flip-card" onClick={onFlip} className="btn">Flip</button>
+```
+
+## Test Structure
+
+- Use **Page Object Model**: place page classes in `tests/e2e/pages/*PageModel.ts`.
+- Locators are declared as `readonly` fields, resolved via `page.getByTestId('af-...')` in the constructor.
+- Wrap every public POM method with `@step('Human readable label')` to keep traces readable.
+- Tests live in `tests/e2e/specs/` and consume page objects through fixtures — never `new` a page object inside a spec.
+- Add JSDoc on POM classes and non-trivial methods.
+
+## Fixtures & Imports
+
+- Import `test` and `expect` from `@fixtures/testFixtures`, not from `@playwright/test`.
+- Add new page objects to `testFixtures.ts` so specs receive them via destructuring.
+- Use TypeScript path aliases (`@pages/*`, `@fixtures/*`, `@support/*`) — no relative paths like `../../pages/...`.
+
+```ts
+// GOOD
+import { test, expect } from '@fixtures/testFixtures'
+
+test('flips card', async ({ studyPage }) => {
+  await studyPage.startSession()
+  await studyPage.flipCard()
+})
+```
+
+## Assertions & Hygiene
+
+- Prefer Playwright web-first assertions (`toBeVisible`, `toHaveText`) — never `expect(await locator.textContent())`.
+- Use `expect.soft(...)` for non-blocking assertions where it improves diagnostics.
+- Keep tests **small, focused, happy-path** unless the feature is shipped and stable.
+- After a new dev phase: run all tests → fix regressions → add tests for new features.

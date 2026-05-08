@@ -1,0 +1,101 @@
+name: E2E Tests (Chromium)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    name: Playwright on Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright (chromium only)
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        run: npx playwright test --project=chromium
+        env:
+          CI: 'true'
+
+      - name: Write summary to GitHub Step Summary
+        if: always()
+        shell: bash
+        run: |
+          REPORT="playwright-report/results.json"
+          {
+            echo "## Playwright E2E Results (Chromium)"
+            echo ""
+            if [ ! -f "$REPORT" ]; then
+              echo "_No JSON report was produced._"
+              exit 0
+            fi
+            node -e '
+              const r = require("./playwright-report/results.json");
+              const s = r.stats || {};
+              const total = (s.expected||0) + (s.unexpected||0) + (s.flaky||0) + (s.skipped||0);
+              const dur = ((s.duration||0)/1000).toFixed(1);
+              const lines = [
+                "| Metric | Count |",
+                "|---|---|",
+                `| Total | ${total} |`,
+                `| Passed | ${s.expected||0} |`,
+                `| Failed | ${s.unexpected||0} |`,
+                `| Flaky | ${s.flaky||0} |`,
+                `| Skipped | ${s.skipped||0} |`,
+                `| Duration (s) | ${dur} |`,
+              ];
+              console.log(lines.join("\n"));
+              const failed = [];
+              const walk = (suites=[]) => suites.forEach(suite => {
+                (suite.specs||[]).forEach(spec => {
+                  spec.tests.forEach(t => {
+                    t.results.forEach(res => {
+                      if (res.status === "failed" || res.status === "timedOut") {
+                        failed.push(`- \`${spec.title}\` — ${res.error?.message?.split("\n")[0] || res.status}`);
+                      }
+                    });
+                  });
+                });
+                walk(suite.suites);
+              });
+              walk(r.suites);
+              if (failed.length) {
+                console.log("\n### Failed tests\n");
+                console.log(failed.join("\n"));
+              }
+            '
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload test results (traces, videos, screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 14
+          if-no-files-found: ignore
