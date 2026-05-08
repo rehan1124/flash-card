@@ -8,3 +8,24 @@ body,
   margin: 0;
   min-height: 100%;
 }
+
+.card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 300ms ease;
+}
+
+.card-3d.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}

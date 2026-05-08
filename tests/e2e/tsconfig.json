@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "paths": {
+      "@fixtures/*": ["fixtures/*"],
+      "@pages/*": ["pages/*"],
+      "@specs/*": ["specs/*"],
+      "@support/*": ["support/*"]
+    }
+  },
+  "include": ["./**/*.ts"]
+}

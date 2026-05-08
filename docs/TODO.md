@@ -28,19 +28,19 @@ Below is a prioritized checklist you can follow to implement one feature at a ti
 ---
 
 ## Phase 1 — Core data model & persistence (easy → medium)
-- [ ] **Implement TypeScript data models and storage wrapper**  
+- [x] **Implement TypeScript data models and storage wrapper**  
   - Files: `types.ts`, `storage.ts`  
   **Acceptance criteria**
   - `Card`, `Deck`, `SessionStats` interfaces implemented as specified.  
   - `storage.ts` exposes `loadDecks(): Deck[]`, `saveDecks(decks: Deck[])`, and handles schema versioning.  
   - Unit tests for `storage` read/write roundtrip pass.
 
-- [ ] **Seed starter deck loader (import starter JSON)**  
+- [x] **Seed starter deck loader (import starter JSON)**  
   **Acceptance criteria**
   - Starter deck JSON (100 items) can be loaded into `localStorage` via a dev-only import route or button.  
   - After import, `DeckList` shows the seeded deck and card count.
 
-- [ ] **DeckList screen and DeckEditor (minimal)**  
+- [x] **DeckList screen and DeckEditor (minimal)**  
   **Acceptance criteria**
   - `/decks` route lists decks with title and card count.  
   - User can create a new deck and add a card (marathi + english).  
@@ -49,26 +49,26 @@ Below is a prioritized checklist you can follow to implement one feature at a ti
 ---
 
 ## Phase 2 — Study session core (medium)
-- [ ] **CardView component with flip animation**  
+- [x] **CardView component with flip animation**  
   **Acceptance criteria**
   - Card front shows **Marathi (Devanagari)** text; tapping/clicking flips to back.  
   - Flip animation uses CSS 3D transform; duration ~300ms; works on mobile and desktop.  
   - Back shows English translation and a **Transliteration reveal** button (transliteration hidden by default).
 
-- [ ] **Right / Wrong controls and per-card counters**  
+- [x] **Right / Wrong controls and per-card counters**  
   **Acceptance criteria**
   - After flip, **Right** and **Wrong** buttons appear.  
   - Clicking **Right** increments `seenCount` and session `correct`.  
   - Clicking **Wrong** increments `seenCount`, increments `wrongCount`, adds card to `redoQueue`, and increments session `incorrect`.  
   - Deck persisted `seenCount` and `wrongCount` update in `localStorage`.
 
-- [ ] **StudySession orchestration (queue + navigation)**  
+- [x] **StudySession orchestration (queue + navigation)**  
   **Acceptance criteria**
   - Study session builds a queue (shuffled by default).  
   - User can navigate to next/previous card in the session.  
   - SessionStats (`studied`, `correct`, `incorrect`) update in `sessionStorage` or in-memory and are visible in a small status bar.
 
-- [ ] **Session stats panel (ephemeral)**  
+- [x] **Session stats panel (ephemeral)**  
   **Acceptance criteria**
   - Stats panel shows `studied`, `correct`, `incorrect`, and accuracy percentage.  
   - Stats are stored in `sessionStorage` and are cleared when the tab/browser is closed (verify by closing and reopening tab).

@@ -1,0 +1,27 @@
+Right happy path tests using playwright, for the phases that are already done.
+
+Follow best practices https://playwright.dev/docs/best-practices.
+
+Everytime when new phase development happens,
+post development check if existing tests are working or not,
+fix the test or app functionality if it is broken.
+Then add new tests as per phase requirements.
+
+Enable capturing screenshot/trace when running playwright tests,
+I need to check the output visually.
+
+Follow industry best practices for structuring automation framework/tests.
+Instead of absolute path, follow mappings https://playwright.dev/docs/test-typescript#tsconfigjson.
+
+Add data-testid to all important web elements wherever test hits.
+Make sure data-testid stays as 1st attribute of the tag where it is added.
+Append af- to the data-testid value.
+
+Follow industry standard design patterns for automated e2e tests.
+
+Keep tests small, add comments when necessary.
+
+Follow test pyramid.
+
+Add guidelines in README file to explain test automation framework structure and any other
+guidelines required to understand them easily.

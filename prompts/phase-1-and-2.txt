@@ -1,0 +1,1 @@
+Use the software requirements and the TODO list to work on Phase 1 and 2 of the project. Mark in the TODO list the items that are done. Make sure nothing breaks that was built earlier.

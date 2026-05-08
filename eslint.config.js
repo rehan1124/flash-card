@@ -25,4 +25,10 @@ export default defineConfig([
       globals: globals.jest,
     },
   },
+  {
+    files: ['tests/e2e/**/*.ts'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
 ])

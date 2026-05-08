@@ -108,7 +108,42 @@ This checklist is mandatory and should be followed for every task before marking
 - `npm run preview` previews the production build locally.
 - `npm run lint` runs ESLint checks.
 - `npm run test` runs Jest + React Testing Library tests.
+- `npm run test:e2e` runs Playwright end-to-end tests.
+- `npm run test:e2e:ui` opens Playwright UI mode for debugging tests.
 - `npm run format` formats files with Prettier.
+
+## Test Automation
+
+```text
+tests/
+└── e2e/
+    ├── specs/                 # Feature-level happy path scenarios (phase0/1/2)
+    ├── pages/                 # Page Object Models (high-level UI actions/assertions)
+    ├── fixtures/              # Shared test data + Playwright fixtures (POM object wiring)
+    ├── support/               # Common e2e utilities/decorators (e.g., @step)
+    └── tsconfig.json          # E2E TypeScript config + path aliases
+```
+
+- Use the test pyramid: keep most coverage in unit tests (`npm run test`) and keep e2e focused on critical user journeys (`npm run test:e2e`).
+- Use stable selectors via `data-testid` with `af-` prefix (first attribute on tagged elements).
+- Use path aliases from `tests/e2e/tsconfig.json` (`@pages/*`, `@fixtures/*`, `@support/*`) instead of deep relative imports.
+- Use Playwright fixtures from `tests/e2e/fixtures/testFixtures.ts` to inject POM objects into tests.
+- Use `expect.soft(...)` for non-critical checks when you want the scenario to continue collecting failures.
+- Artifacts are generated at `playwright-report/` (HTML report) and `test-results/` (screenshots/videos/traces).
+- Generate and open report with:
+
+  ```bash
+  npm run test:e2e
+  npx playwright show-report
+  ```
+
+- Open an individual trace with:
+
+  ```bash
+  npx playwright show-trace <trace.zip>
+  ```
+
+- Change policy: when a new phase is implemented, run existing tests first, fix regressions, then add tests for the new acceptance criteria.
 
 ## First-Day Workflow
 
@@ -116,5 +151,6 @@ This checklist is mandatory and should be followed for every task before marking
 - Start dev server: `npm run dev`
 - Run lint checks: `npm run lint`
 - Run tests: `npm run test`
+- Run e2e tests: `npm run test:e2e`
 - Format code: `npm run format`
 
