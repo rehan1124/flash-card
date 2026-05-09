@@ -3,6 +3,10 @@ import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppStore } from '../store/useAppStore'
 
+/** Readable typed text + placeholders on white / slate card surfaces (light & dark). */
+const formControlClass =
+  'w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-400'
+
 export const DecksPage = () => {
   const { decks, createDeck, addCardToDeck, seedStarterDeck } = useAppStore()
   const [selectedDeckId, setSelectedDeckId] = useState<string>('')
@@ -72,14 +76,14 @@ export const DecksPage = () => {
           <h3 className="font-semibold">Create Deck</h3>
           <input
             data-testid="af-deck-title-input"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+            className={formControlClass}
             placeholder="Deck title"
             value={deckTitle}
             onChange={(event) => setDeckTitle(event.target.value)}
           />
           <textarea
             data-testid="af-deck-description-input"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+            className={formControlClass}
             placeholder="Description (optional)"
             value={deckDescription}
             onChange={(event) => setDeckDescription(event.target.value)}
@@ -143,7 +147,7 @@ export const DecksPage = () => {
         <h3 className="font-semibold">Deck Editor</h3>
         <select
           data-testid="af-deck-selector"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+          className={`${formControlClass} ${selectedDeckId ? '' : 'text-slate-500 dark:text-slate-400'}`}
           value={selectedDeckId}
           onChange={(event) => setSelectedDeckId(event.target.value)}
         >
@@ -156,21 +160,21 @@ export const DecksPage = () => {
         </select>
         <input
           data-testid="af-card-marathi-input"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+          className={formControlClass}
           placeholder="Marathi (Devanagari)"
           value={marathi}
           onChange={(event) => setMarathi(event.target.value)}
         />
         <input
           data-testid="af-card-english-input"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+          className={formControlClass}
           placeholder="English meaning"
           value={english}
           onChange={(event) => setEnglish(event.target.value)}
         />
         <input
           data-testid="af-card-transliteration-input"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-800"
+          className={formControlClass}
           placeholder="Transliteration (optional)"
           value={transliteration}
           onChange={(event) => setTransliteration(event.target.value)}
