@@ -1,14 +1,29 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const reporters: Array<[string] | [string, Record<string, unknown>]> = [
+  ['list'],
+  ['html', { open: 'never' }],
+]
+
+if (process.env.CI) {
+  reporters.push([
+    '@estruyf/github-actions-reporter',
+    {
+      title: 'Playwright E2E Results',
+      useDetails: true,
+      showError: true,
+      showArtifactsLink: true,
+    },
+  ])
+}
+
 export default defineConfig({
   testDir: './tests/e2e/specs',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI
-    ? [['list'], ['html', { open: 'never' }], ['github'], ['json', { outputFile: 'playwright-report/results.json' }]]
-    : [['list'], ['html', { open: 'never' }]],
+  reporter: reporters,
   use: {
     baseURL: 'http://127.0.0.1:4173',
     trace: 'on',

@@ -13,6 +13,11 @@ dist-ssr
 *.local
 playwright-report/
 test-results/
+allure-results/
+allure-report/
+blob-report/
+junit-results.xml
+junit-report.xml
 
 # Editor directories and files
 .vscode/*

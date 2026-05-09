@@ -151,6 +151,7 @@ tests/
   ```
 
 - Change policy: when a new phase is implemented, run existing tests first, fix regressions, then add tests for the new acceptance criteria.
+- Reporter setup is intentionally low-maintenance: local runs use Playwright list/html reports, while `@estruyf/github-actions-reporter` runs only in CI for GitHub workflow summaries.
 
 ## First-Day Workflow
 
