@@ -175,7 +175,7 @@ export const StudyPage = () => {
           data-testid="af-unknown-count"
           className="ml-auto rounded-md bg-amber-100 px-3 py-2 text-sm text-amber-900 dark:bg-amber-900/40 dark:text-amber-100"
         >
-          Unknown this session: {redoQueue.length}
+          Wrong answers: {redoQueue.length}
         </span>
       </footer>
     </div>

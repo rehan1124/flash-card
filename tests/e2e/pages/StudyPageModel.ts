@@ -64,8 +64,9 @@ export class StudyPageModel {
     await expect(this.statsIncorrect).toHaveText(incorrect)
   }
 
-  @step('Assert unknown count')
-  async expectUnknownCount(count: number) {
+  @step('Assert wrong answers count')
+  async expectWrongAnswersCount(count: number) {
+    await expect(this.unknownCount).toContainText('Wrong answers:')
     await expect(this.unknownCount).toContainText(String(count))
   }
 }

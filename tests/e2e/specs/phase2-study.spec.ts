@@ -16,7 +16,7 @@ test.describe('Phase 2 study session', () => {
     await studyPage.flipCard()
     await expect.soft(studyPage.markWrongButton).toBeVisible()
     await studyPage.markWrong()
-    await studyPage.expectUnknownCount(1)
+    await studyPage.expectWrongAnswersCount(1)
     await studyPage.expectMetrics('1', '0', '1')
 
     await studyPage.flipCard()
