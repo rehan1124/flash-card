@@ -33,9 +33,16 @@ flash-card/
 
 1. Read `docs/specification.md` for product scope and constraints.
 2. Read `docs/TODO.md` and pick the next unchecked task.
-3. Run app + lint + tests locally before making changes.
-4. Implement against acceptance criteria, then verify manually.
-5. Update docs and TODO status only after criteria are satisfied.
+3. Read testing standards docs (`docs/PlaywrightE2ETests.md`, `docs/TestCases.md`, and `.cursor/rules/e2e-tests.mdc`) before changing E2E tests.
+4. Run app + lint + tests locally before making changes.
+5. Implement against acceptance criteria, then verify manually.
+6. Update docs and TODO status only after criteria are satisfied.
+
+## Standards & Governance
+
+- `docs/PlaywrightE2ETests.md`: source-of-truth E2E instructions (POM, fixtures, hooks, quality gates, naming).
+- `.cursor/rules/e2e-tests.mdc`: actionable Cursor enforcement rules for E2E implementation details.
+- `docs/TestCases.md`: current high-level E2E coverage list with `TCxxx` IDs that must stay synchronized with Playwright test titles.
 
 ## Getting Started
 
