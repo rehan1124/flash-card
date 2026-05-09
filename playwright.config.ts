@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
 
+/** When set (e.g. production smoke test), tests hit this origin and local `webServer` is skipped. */
+const remoteBaseURL = process.env.PLAYWRIGHT_BASE_URL
+
 const reporters: Array<[string] | [string, Record<string, unknown>]> = process.env.CI
   ? [
       ['list'],
@@ -24,17 +27,21 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: reporters,
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: remoteBaseURL ?? 'http://127.0.0.1:4173',
     trace: 'on',
     screenshot: 'on',
     video: 'retain-on-failure',
   },
-  webServer: {
-    command: 'npm run build && npm run preview -- --host 127.0.0.1 --port 4173',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
-  },
+  ...(remoteBaseURL
+    ? {}
+    : {
+        webServer: {
+          command: 'npm run build && npm run preview -- --host 127.0.0.1 --port 4173',
+          url: 'http://127.0.0.1:4173',
+          reuseExistingServer: !process.env.CI,
+          timeout: 180_000,
+        },
+      }),
   projects: [
     {
       name: 'chromium',
