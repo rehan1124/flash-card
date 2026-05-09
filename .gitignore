@@ -20,6 +20,7 @@ junit-results.xml
 junit-report.xml
 
 # Editor directories and files
+.cursor/mcp.json
 .vscode/*
 !.vscode/extensions.json
 .idea
