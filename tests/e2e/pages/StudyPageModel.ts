@@ -17,6 +17,7 @@ export class StudyPageModel {
   readonly statsStudied: Locator
   readonly statsCorrect: Locator
   readonly statsIncorrect: Locator
+  readonly statsEmpty: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -30,6 +31,7 @@ export class StudyPageModel {
     this.statsStudied = page.getByTestId('af-stats-studied')
     this.statsCorrect = page.getByTestId('af-stats-correct')
     this.statsIncorrect = page.getByTestId('af-stats-incorrect')
+    this.statsEmpty = page.getByTestId('af-stats-empty')
   }
 
   @step('Start study session')
@@ -68,5 +70,11 @@ export class StudyPageModel {
   async expectWrongAnswersCount(count: number) {
     await expect(this.unknownCount).toContainText('Wrong answers:')
     await expect(this.unknownCount).toContainText(String(count))
+  }
+
+  @step('Assert session stats cleared after reload')
+  async expectSessionStatsCleared() {
+    await expect(this.statsEmpty).toBeVisible()
+    await expect(this.statsEmpty).toContainText('No active session yet.')
   }
 }
