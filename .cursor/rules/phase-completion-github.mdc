@@ -1,0 +1,35 @@
+---
+description: Close GitHub roadmap issues and update checklists when a phase ships with tests
+alwaysApply: true
+---
+
+# Phase completion → GitHub issues & issue bodies
+
+When **all** acceptance criteria for a **phase or cross-cutting block** in `docs/TODO.md` are implemented **and** automated tests cover the new behavior (unit and/or E2E per project standards), finish the workflow below before treating the work as done.
+
+## Roadmap issue mapping
+
+Use these GitHub issues for the open roadmap (see repo Issues); adjust numbers only if Issues were recreated:
+
+| Scope | Typical issue |
+|------|----------------|
+| Phase 3 — Redo unknown + UX polish | `#2` |
+| Phase 4 — Quiz modes (MCQ & Fill-in) | `#3` |
+| Phase 5 — Robustness, testing, accessibility | `#4` |
+| Phase 6 — Polish, deploy, extras | `#5` |
+| Cross-cutting tasks | `#6` |
+
+Phases **0–2** are already complete in `docs/TODO.md`; there is no separate roadmap issue for each historical phase unless the team adds one.
+
+## Required steps when a phase is complete
+
+1. **`docs/TODO.md`** — Mark every checkbox under that phase (or cross-cutting section) as `[x]` only after verification (manual + automated tests).
+2. **Tests** — Ensure new/changed behavior has tests (Jest and/or Playwright per `.cursor/rules/e2e-tests.mdc`); run `npm run lint`, `npm run test`, and `npm run test:e2e` when E2E-relevant.
+3. **GitHub issue body** — Edit the matching roadmap issue: turn `- [ ]` into `- [x]` for every bullet that is **actually done**. Do not check boxes for work not shipped.
+4. **Close the issue** — Close with a short closing comment that references the PR/commit range and confirms tests pass (e.g. “Phase N complete per `docs/TODO.md`; lint + unit + e2e green.”).
+5. Prefer **`gh issue close <number> --comment "..."`** when GitHub CLI is available and authenticated; otherwise use the GitHub web UI or REST API with credentials the user provides—do not embed tokens in code or commits.
+
+## Do not
+
+- Close an issue or check every box when only **part** of the phase is done.
+- Skip updating `docs/TODO.md` or `docs/TestCases.md` when E2E coverage changed (see `.cursor/rules/e2e-tests.mdc`).
