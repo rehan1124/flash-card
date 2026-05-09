@@ -1,0 +1,12 @@
+---
+description: Keep README screenshots current and minimal
+alwaysApply: true
+---
+
+# README Screenshots
+
+- Keep a dedicated `## App Screenshots` section at the end of `README.md`.
+- Include only high-value screens that provide a quick product overview (avoid clutter).
+- Use stable image paths under `public/screenshots/` with clear filenames.
+- When a meaningful UI change affects existing screenshots, refresh the impacted images before finalizing.
+- If a new major surface is introduced, add at most one additional screenshot and keep the section concise.

@@ -117,6 +117,7 @@ This checklist is mandatory and should be followed for every task before marking
 - `npm run test` runs Jest + React Testing Library tests.
 - `npm run test:e2e` runs Playwright end-to-end tests.
 - `npm run test:e2e:ui` opens Playwright UI mode for debugging tests.
+- `npm run screenshots:readme` refreshes high-level app screenshots used in README.
 - `npm run format` formats files with Prettier.
 
 ## Test Automation
@@ -161,4 +162,20 @@ tests/
 - Run tests: `npm run test`
 - Run e2e tests: `npm run test:e2e`
 - Format code: `npm run format`
+
+## App Screenshots
+
+High-level visual overview of the key app surfaces. Keep this section concise and refresh screenshots when meaningful UI changes are made.
+
+### Decks Overview
+
+![Decks overview](public/screenshots/decks-overview.png)
+
+### Study Session (Front)
+
+![Study session front](public/screenshots/study-front.png)
+
+### Study Session (Back / Translation)
+
+![Study session back](public/screenshots/study-back.png)
 
