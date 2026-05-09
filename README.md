@@ -68,6 +68,8 @@ flash-card/
 
 The app is a **Vite + React SPA** with client-side routing (`react-router-dom`). `vercel.json` configures SPA **rewrites** so deep links such as `/decks` and `/deck/:deckId/study` keep working after a refresh or when opened directly.
 
+**Production:** https://flash-card-ashy.vercel.app
+
 **Recommended (GitHub):**
 
 1. Ensure this repository is pushed to GitHub.
