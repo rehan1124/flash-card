@@ -51,3 +51,22 @@ test('flips card', async ({ studyPage }) => {
 - Use `expect.soft(...)` for non-blocking assertions where it improves diagnostics.
 - Keep tests **small, focused, happy-path** unless the feature is shipped and stable.
 - After a new dev phase: run all tests → fix regressions → add tests for new features.
+
+## Quality & Tooling
+
+- Follow existing project standards for all test-related files (`tests/e2e/**`, Playwright config, test fixtures, and test documentation updates).
+- Format test changes with project formatter (`npm run format`) when needed for consistency.
+- Ensure lint passes before finalizing E2E changes (`npm run lint`).
+- Ensure unit tests still pass when shared logic/config is touched (`npm run test`).
+- Ensure Playwright suite passes after E2E changes (`npm run test:e2e`).
+- Avoid introducing test-only lint bypasses; if unavoidable, scope them narrowly and document why.
+- Keep naming and casing consistent with current repository patterns (fixtures, page models, spec names, and TC IDs).
+
+## Test List
+
+- When adding any new tests, add it to `docs/TestCases.md` to maintain list of current tests coverage. Just high level description, not too detailed.
+- Use a Markdown table format with columns: `Test Case ID`, `Title`, `Coverage`.
+- Use sequential IDs in the format `TC001`, `TC002`, `TC003`, ...
+- Add one row per test scenario with concise high-level wording.
+- Prefix each Playwright test title with the matching test case ID (example: `test('TC001 | App shell and theme toggle render', ...)`).
+- Keep Playwright test title IDs and title text in sync with `docs/TestCases.md`.

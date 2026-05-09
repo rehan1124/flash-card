@@ -13,6 +13,7 @@
 - Add @step decorator to hide low level playwright actions and instead show POM method names.
 - Add documentation to files, methods, classes, whatever comes under industry practices.
 - Use fixtures from https://playwright.dev/docs/test-fixtures#creating-a-fixture to create class objects and then pass them to tests.
+- Keep common steps in beforeEach, afterEach, beforeAll, afterAll hooks. Use Playwright suggested setup/teardown where required.
 
 ---
 
@@ -32,6 +33,17 @@
 - Follow **industry-standard design patterns** for automated E2E tests (e.g., Page Object Model).  
 - Use **TypeScript path mappings** in `tsconfig.json` instead of absolute or relative paths.  
 - Keep tests modular and organized by feature area.  
+- Prefix each Playwright test title with `TCxxx |` and keep the title text synchronized with `docs/TestCases.md` entries.
+
+---
+
+## 🧰 Quality & Tooling
+- Follow existing project standards for all test-related files (`tests/e2e/**`, Playwright config, fixtures, and test docs).  
+- Keep formatting consistent using project tooling (`npm run format`) when needed.  
+- Ensure lint passes before finalizing E2E changes (`npm run lint`).  
+- Ensure unit tests pass when shared logic/config is touched (`npm run test`).  
+- Ensure Playwright E2E suite passes after changes (`npm run test:e2e`).  
+- Avoid broad test-only lint bypasses; if unavoidable, scope narrowly and document why.
 
 ---
 

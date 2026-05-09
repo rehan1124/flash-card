@@ -2,7 +2,7 @@ import { expect, test } from '@fixtures/testFixtures'
 import { testCard, testDeck } from '@fixtures/testData'
 
 test.describe('Phase 2 study session', () => {
-  test('flip, mark wrong/right, navigate, and update stats', async ({ decksPage, studyPage }) => {
+  test('TC004 | Study flow records right/wrong behavior', async ({ decksPage, studyPage }) => {
     await decksPage.goto()
     await decksPage.resetStorage()
     await decksPage.createDeck(testDeck.title, testDeck.description)

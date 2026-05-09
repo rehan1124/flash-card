@@ -14,7 +14,7 @@ test.describe('Phase 1 deck workflow', () => {
     })
   })
 
-  test('create deck, add card, and persist after reload', async ({ page, decksPage }) => {
+  test('TC002 | Deck create/add persists across reload', async ({ page, decksPage }) => {
 
     await decksPage.createDeck(testDeck.title, testDeck.description)
     await decksPage.expectDeckWithCount(testDeck.title, '0 cards')
@@ -31,7 +31,7 @@ test.describe('Phase 1 deck workflow', () => {
     await decksPage.expectDeckWithCount(testDeck.title, '1 cards')
   })
 
-  test('loads starter deck through seed button', async ({ decksPage }) => {
+  test('TC003 | Starter deck seeding works', async ({ decksPage }) => {
     await decksPage.seedStarterDeck()
     await decksPage.expectDeckWithCount('Marathi Starter Deck (100)', '100 cards')
   })
