@@ -1,0 +1,10 @@
+---
+description: Never git commit or push unless the user explicitly requests it
+alwaysApply: true
+---
+
+# Git commit and push
+
+- **Do not** run `git commit`, `git push`, or equivalent unless the user **explicitly** asks (e.g. “commit”, “push to repo”, “push changes”).
+- Finishing implementation, tests, or docs **does not** imply permission to commit or push.
+- If work is ready but the user has not asked to push, stop after local verification and summarize **without** committing unless they asked only for a commit locally.
