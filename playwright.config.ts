@@ -1,21 +1,20 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const reporters: Array<[string] | [string, Record<string, unknown>]> = [
-  ['list'],
-  ['html', { open: 'never' }],
-]
-
-if (process.env.CI) {
-  reporters.push([
-    '@estruyf/github-actions-reporter',
-    {
-      title: 'Playwright E2E Results',
-      useDetails: true,
-      showError: true,
-      showArtifactsLink: true,
-    },
-  ])
-}
+const reporters: Array<[string] | [string, Record<string, unknown>]> = process.env.CI
+  ? [
+      ['list'],
+      ['blob'],
+      [
+        '@estruyf/github-actions-reporter',
+        {
+          title: 'Playwright E2E Results',
+          useDetails: true,
+          showError: true,
+          showArtifactsLink: true,
+        },
+      ],
+    ]
+  : [['list'], ['html', { open: 'never' }]]
 
 export default defineConfig({
   testDir: './tests/e2e/specs',
