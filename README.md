@@ -64,6 +64,32 @@ flash-card/
    npm run build
    ```
 
+## Deploy to Vercel
+
+The app is a **Vite + React SPA** with client-side routing (`react-router-dom`). `vercel.json` configures SPA **rewrites** so deep links such as `/decks` and `/deck/:deckId/study` keep working after a refresh or when opened directly.
+
+**Recommended (GitHub):**
+
+1. Ensure this repository is pushed to GitHub.
+2. Sign in at [vercel.com](https://vercel.com) → **Add New…** → **Project** → **Import** your `flash-card` repository.
+3. Leave defaults or set explicitly:
+   - **Framework Preset:** Vite (or “Other” if needed)
+   - **Install Command:** `npm install`
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+4. Deploy. Vercel provides a production URL you can share.
+
+No server-side env vars are required for the current build (data stays in the browser via `localStorage` / `sessionStorage`).
+
+**CLI (optional):**
+
+```bash
+npx vercel login
+npx vercel
+```
+
+Production deploy: `npx vercel --prod`. The local `.vercel` folder is gitignored.
+
 ## Architecture Notes
 
 - **Frontend:** React + TypeScript with Vite for fast feedback loops.
