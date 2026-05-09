@@ -50,6 +50,7 @@ export const CardView = ({ card, onMarkRight, onMarkWrong }: CardViewProps) => {
                   aria-label="Reveal transliteration"
                   className="rounded-md border border-indigo-300 px-3 py-1 text-sm text-indigo-800 hover:bg-indigo-100 dark:border-indigo-700 dark:text-indigo-200 dark:hover:bg-indigo-900"
                   onClick={(event) => {
+                    // Keep the transliteration toggle from also flipping the card container.
                     event.stopPropagation()
                     setShowTransliteration((value) => !value)
                   }}

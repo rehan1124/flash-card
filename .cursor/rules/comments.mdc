@@ -1,0 +1,12 @@
+---
+description: Commenting guidelines for maintainable code
+alwaysApply: true
+---
+
+# Comments
+
+- Add comments only where intent is not obvious from the code itself.
+- Prefer short high-level comments that explain **why** a block exists, not line-by-line **what** it does.
+- Add comments around complex logic, non-obvious business rules, and tricky edge-case handling.
+- Keep comments concise and current; update or remove stale comments when behavior changes.
+- Avoid noisy comments that restate obvious code.

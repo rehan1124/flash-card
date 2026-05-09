@@ -36,6 +36,7 @@ export const StudyPage = () => {
   }
 
   const updateCardCounters = (cardId: UUID, isCorrect: boolean) => {
+    // Persist card-level learning signals so future sessions can prioritize weak cards.
     updateDecks((existingDecks) =>
       existingDecks.map((existingDeck) => {
         if (existingDeck.id !== deck.id) {
@@ -77,6 +78,7 @@ export const StudyPage = () => {
     updateCardCounters(activeCard.id, isCorrect)
     recordAnswer(isCorrect)
     if (!isCorrect) {
+      // Keep a simple session-level tally for UX visibility ("Wrong answers: N").
       setRedoQueue((previous) => [...previous, activeCard.id])
     }
 
@@ -87,6 +89,7 @@ export const StudyPage = () => {
   const isSessionReady = queue.length > 0
 
   const initializeSession = () => {
+    // Session order is randomized to reduce positional memorization.
     setQueue(shuffle(deck.cards.map((card) => card.id)))
     setIndex(0)
     setRedoQueue([])

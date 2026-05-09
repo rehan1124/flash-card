@@ -25,6 +25,7 @@ type AppStore = {
 const THEME_STORAGE_KEY = 'marathi_flash_theme'
 
 const getStoredTheme = (): Theme => {
+  // Default to light during SSR/non-browser execution to avoid runtime access errors.
   if (typeof window === 'undefined') {
     return 'light'
   }
@@ -93,6 +94,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
     )
   },
   seedStarterDeck: () => {
+    // Prevent duplicate starter content when users click seed multiple times.
     const hasStarter = get().decks.some((deck) => deck.title.includes('Starter Deck'))
     if (hasStarter) {
       return
@@ -125,6 +127,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
   },
   recordAnswer: (isCorrect) => {
     const previousStats = get().sessionStats
+    // Recover gracefully if stats were cleared mid-session (e.g., tab/session reset).
     const nextStats: SessionStats = previousStats
       ? {
           ...previousStats,
