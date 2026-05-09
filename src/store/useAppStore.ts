@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createStarterDeck } from '../data/starterDeck'
+import { isNavigationReload } from '../lib/navigation'
 import { clearSessionStats, loadSessionStats, saveSessionStats } from '../lib/sessionStats'
 import { loadDecks, saveDecks } from '../lib/storage'
 import { createId } from '../lib/utils'
@@ -51,6 +52,12 @@ export const useAppStore = create<AppStore>((set, get) => ({
   sessionStats: undefined,
   loadDecksFromStorage: () => {
     const decks = loadDecks()
+    if (isNavigationReload()) {
+      clearSessionStats()
+      set({ decks, sessionStats: undefined })
+      return
+    }
+
     const sessionStats = loadSessionStats()
     set({ decks, sessionStats })
   },
